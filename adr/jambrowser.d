@@ -198,7 +198,10 @@ class HtmlViewerWidget : Widget {
 		}
 		this.uri = uri;
 
-		document.parseGarbage("<html>" ~ source ~ "</html>"); // if the document has a proper html tag, this adds another one but that's fairly harmless. if it doesn't, this ensures there is a single root for the parser
+		document.parseGarbage("<html><body>" ~ source ~ "</body></html>"); // if the document has a proper html tag, this adds another one but that's fairly harmless. if it doesn't, this ensures there is a single root for the parser
+		if(auto extra = document.querySelector("body body")) {
+			document.mainBody.stripOut;
+		}
 
 		string css;
 		if(cssEnabled) {
