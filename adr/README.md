@@ -55,6 +55,8 @@ Its home page is a file that exists on my computer, so you'll see a lovely "File
 
 Note that on Windows, the keyboard focus is buggy in the browser window, so keyboard scrolling is going to not work well. I ran out of time before having a chance to fix that. Should work ok on Linux though. Mouse scrolling and clicking links ought to work ok, and the menu is fairly functional.
 
+You will probably notice it is awfully slow; you can see lag when resizing the window, especially on Windows. The actual network loader blocks the main thread too, that's easy enough to fix, I just ran out of time.
+
 ![Screenshot of the browser](screenshot.png)
 
 # Explanations
@@ -93,4 +95,12 @@ Well... it actually did kinda work! Here's some screenshots from that previous a
 
 I had images and forms kinda working - in many ways, that old browser was more functional than this new one! But it also had some problems. Notice the bizarre word wrap in that third screenshot? After the "RPG creation toolkit" link? Yeah... it assumed all nodes were single rectangles. It also uses a monospace font both because my text layout libraries were poor. And they remained poor for a long time - it took me three tries to make a text layouter lib that I didn't think was useless junk.
 
-But now I have one, so getting back into a browser is something I wanted to do for a while anyway! But I'm out of time, so even this story has to wait, time to go.
+But now I have one, so getting back into a browser is something I wanted to do for a while anyway! Many of the support libraries are the same between that old attempt and this one, but not all, and the html layout stuff is rewritten, which is why there's a loss of some functionality, but I think this new way has more potential than the old one.
+
+# Future plans
+
+I don't plan to make this into a general purpose browser with all the fancy features. I have arsd.webview for that, which uses the big name browser engines. (Though I just might provide an adapter so this little full custom engine can use most that same interface! A fully custom backend or the big name engine, your choice.) Instead, I think a more realistic application is as a semi-rich hypertext display widget in minigui, something you're probably not throwing at the open internet, but rather just want to display local documentation or some primarily text UI element and thus can adjust the html to work fine with its features and can't justify a huge full engine dependency for. Various features can be controlled by the application - do you want to give it network access at all? Image support? Such things need not be compiled in, but should be easy to do.
+
+It might also be nice as an alternative html email viewer, along with my existing html to text function (included here as the `bonus-html_to_plain_text.d` file, using the `arsd.htmltotext` library module).
+
+These uses are where it can provide real value in the short term... while maybe still doing more long term, who knows, maybe in another 15 years I will have a working more serious browser lol.
